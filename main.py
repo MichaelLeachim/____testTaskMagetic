@@ -29,7 +29,8 @@ class Facade(object):
       json.dump(data, outfile)
       
   def showInTemplate(self,path="workdata/output.html",input_data='workdata/data.txt'):
-    
+    pass
+  
   def runHTTPServer(self,port):
     pass
   
