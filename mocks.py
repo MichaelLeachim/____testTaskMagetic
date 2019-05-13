@@ -6,13 +6,14 @@
 # @@@@@@ At 2019-05-13 13:51 <thereisnodotcollective@gmail.com> @@@@@@@@@@@@@@@@@@@@@@@@
 
 
+
 class MockDataGetter(object):
   def get(self,url):
-
-    if url == "https://play.google.com/store/apps/category/GAME":
-      with open("testdata/GAME.html","r") as file:
+    try:
+      # import ipdb;ipdb.set_trace()
+      with open("testdata/"+url.split("/")[-1],"r") as file:
         res = file.read()
         res.decode("utf8")
         return res, None
-        
-    return (u"","Error: cannot get the source on a mock object"  )
+    except:
+      return (u"","Error: cannot get the source on a mock object"  )
