@@ -6,16 +6,17 @@
 # @@@@@@ At 2019-05-13 13:19 <thereisnodotcollective@gmail.com> @@@@@@@@@@@@@@@@@@@@@@@@
 
 from flask import Flask
+from flask import request
+
+import json
+from tools import RenderCategoryResults
+
+
 app = Flask(__name__)
 
 @app.route("/")
 def mainPage():
   search_string = request.args.get('search') or ""
-  with open(input_data,"r") as datum_file:
+  with open("workdata/data.txt","r") as datum_file:
     datum = json.load(datum_file)
-    datum = [[cat,game] for [cat,game] in datum if search_string in game.lower()]
-    with open("templates/base.html","r") as template_file:
-      template_string = template_file.read()
-      return pystache.render(template_string,context=datum)
-
-
+    return RenderCategoryResults([[cat,game] for [cat,game] in datum if search_string in game.lower()])

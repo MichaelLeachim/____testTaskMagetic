@@ -9,11 +9,12 @@ import json
 
 import fire
 import logging
-import pystache
+
 
 from downloader import Downloader
 from data_getter import DataGetter
-from tools import AppConfig
+from tools import AppConfig,RenderCategoryResults
+from serve import app
 
 class Facade(object):
   
@@ -26,19 +27,19 @@ class Facade(object):
     conf.logging = logging
     d = Downloader(conf)
     data = d.downloadAllDataAsList()
-    with open(save_to, 'w') as outfile:  
+    with open(save_to, 'w+') as outfile:  
       json.dump(data, outfile)
       
+  # will show results in outout data    
   def showInTemplate(self,path="workdata/output.html",input_data='workdata/data.txt'):
     with open(input_data,"r") as datum_file:
       datum = json.load(datum_file)
-      with open("templates/base.html","r") as template_file:
-        template_string = template_file.read()
-        with open(path,"w") as write_to:
-          write_to.write(pystache.render(template_string,context=datum))
-  def runHTTPServer(self,port):
-    pass
-  
+      with open(path,"w+") as write_to:
+        write_to.write(RenderCategoryResults(datum))
+        
+  def runHTTPServer(self,port=8000):
+    app.run(host='0.0.0.0', port=port)
+    
 if __name__ == '__main__':
   fire.Fire(Facade)
   

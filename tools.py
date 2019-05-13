@@ -5,5 +5,15 @@
 # @ All rights reserved.                                                               @
 # @@@@@@ At 2019-05-13 13:29 <thereisnodotcollective@gmail.com> @@@@@@@@@@@@@@@@@@@@@@@@
 
+import pystache
+
 class AppConfig:
   pass
+
+def RenderCategoryResults(datum):
+  with open("templates/base.html","r") as template_file:
+    template_string = template_file.read()
+    return pystache.render(template_string,context=datum)
+  
+  
+  
