@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # @ Copyright (c) Michael Leahcim                                                      @
 # @ You can find additional information regarding licensing of this work in LICENSE.md @
