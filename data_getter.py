@@ -17,7 +17,9 @@ class DataGetter(object):
     try:
       result = requests.get(link,params=params,**kwargs)
       if result.ok:
-        return (result.content,None)
+        # import ipdb;ipdb.set_trace()
+        # print type(result.content)
+        return (result.content.decode("utf8"),None)
       return result.content,result.reason
     except Exception as e:
       return (None, "Error: " + str(e))

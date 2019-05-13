@@ -10,6 +10,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def mainPage():
-  return "Hello World!"
+  search_string = request.args.get('search') or ""
+  with open(input_data,"r") as datum_file:
+    datum = json.load(datum_file)
+    datum = [[cat,game] for [cat,game] in datum if search_string in game.lower()]
+    with open("templates/base.html","r") as template_file:
+      template_string = template_file.read()
+      return pystache.render(template_string,context=datum)
 
 

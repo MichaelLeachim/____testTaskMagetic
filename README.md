@@ -19,18 +19,25 @@ pip install -r reqs.txt;
 
 ## How to run 
 
-All three tasks are
+### First task
 
+Will download data to the folder workdata
+under the name `data.txt`
 
 ```shell
 
-source venv/bin/activate;
+python main.py downloadData
 
 ```
-# How to test
-```shell
 
-pytest; 
+### Second task
+
+```shell
+python main.py 
+
+```
+
+
 
 ```
 
