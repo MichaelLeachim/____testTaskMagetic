@@ -9,6 +9,7 @@
 import requests,logging
 
 from downloader import Downloader
+from data_getter import DataGetter
 
 from tools import AppConfig
 from mocks import MockDataGetter

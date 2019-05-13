@@ -48,8 +48,7 @@ class Downloader(object):
   # Will return [] as a result
   # Will return partially, if cannot download
   # some of the links. Will log them on Fatal level
-  def downloadAllData(self):
-    
+  def downloadAllDataAsList(self):
     cats,err = self.getCategoriesList()
     if err != None:
       self.logging.fatal("Cannot get categories list: ",err)
@@ -63,10 +62,12 @@ class Downloader(object):
         self.logging.fatal("Cannot get games on cat: ",cat," with err: ",err)
         continue
       for game in games:
-        result.append(cat+"/"+game)
-        
-    return result    
-        
-      
-      
-      
+        result.append([cat,game])
+    return result
+  
+  # pprint according to a spec
+  def downloadAllData(self):
+    result = []
+    for item in self.downloadAllDataAsList():
+      result.append(item[0]+"/"+item[1])
+    return result  
