@@ -6,6 +6,18 @@ Test task has three units:
 * Data rendering unit   (will render downloaded data according to the spec)
 * Live rendering unit   (will render downloaded data and maintain search on it)
 
+Test task uses the following OSS libraries:
+
+* Pytest
+* Requests
+* PureCSS/WireframeCSS
+* Pystache
+* Flask
+* Fire
+
+This task uses DI and tests are done via mocking 
+downloader (in order to not to hit Google too much)
+
 ## How to install
 
 ### Set up virtualenv and install requirements
@@ -31,6 +43,7 @@ Parameter `--save_to` is optional
 python main.py downloadData --save_to='workdata/data.txt'
 
 ```
+
 
 #### Sub unit (format according to spec)
 
@@ -85,12 +98,14 @@ wget 127.0.0.1:8000/?search=racing
 
 ```
 
+# How to test
 
+```shell
 
+pytest . 
 
 
 ```
-
 
 
 
