@@ -21,6 +21,7 @@ class Facade(object):
   def __init__(self):
     logging.basicConfig(filename='log/app.log', filemode='w')
     
+  # will download data to a folder
   def downloadData(self,save_to='workdata/data.txt'):
     conf = AppConfig()
     conf.dataGetter = DataGetter()
@@ -30,7 +31,7 @@ class Facade(object):
     with open(save_to, 'w+') as outfile:  
       json.dump(data, outfile)
       
-  # will show results in outout data    
+  # will show results as a HTML
   def showInTemplate(self,path="workdata/output.html",input_data='workdata/data.txt'):
     with open(input_data,"r") as datum_file:
       datum = json.load(datum_file)

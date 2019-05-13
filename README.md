@@ -11,31 +11,57 @@ Test task has three units:
 ### Set up virtualenv and install requirements
 
 ```shell
+
 git clone https://github.com/MichaelLeachim/____testTaskMagetic; 
 virtualenv venv;
 source venv/bin/activate; 
 pip install -r reqs.txt;
+
 ```
 
 ## How to run 
 
 ### First task
 
-Will download data to the folder workdata
-under the name `data.txt`
+Will download data according to spec.
+Parameter `--save_to` is optional
 
 ```shell
 
-python main.py downloadData
+python main.py downloadData --save_to='workdata/data.txt'
 
 ```
+
 
 ### Second task
 
+Will translate downloaded data into a HTML template
+Parameters `--path` and `--input_data` are optional
+
 ```shell
-python main.py 
+
+python main.py showInTemplate --path=workdata/output.html  --input_data=workdata/data.txt
 
 ```
+
+### Third task
+
+Will run a flaks app that allows filtering by the
+search parameter.
+
+
+Parameter `--port` is optional
+
+```shell
+
+python main.py runHTTPServer --port=8000
+# For example
+
+wget 127.0.0.1:8000/?search=racing
+
+```
+
+
 
 
 
