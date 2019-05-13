@@ -32,6 +32,30 @@ python main.py downloadData --save_to='workdata/data.txt'
 
 ```
 
+#### Sub unit (format according to spec)
+
+In order to format downloaded data according to 
+the spec, use the following command
+Parameters `--path` and `--input_data` are optional
+
+```shell
+
+python main.py formatAccordingToSpec --path=workdata/data.output.txt  --input_data=workdata/data.txt
+
+tail workdata/data.output.txt;
+# GAME_WORD/com.zynga.words
+# GAME_WORD/com.zynga.wwf2.free
+# GAME_WORD/com.zytoona.wordscrush
+# GAME_WORD/de.lotum.whatsinthefoto.us
+# GAME_WORD/es.socialpoint.wordlife
+# GAME_WORD/mindware.wordgames
+# GAME_WORD/se.maginteractive.rumble
+# GAME_WORD/se.maginteractive.rumble.free
+# GAME_WORD/se.maginteractive.wordbrain
+# GAME_WORD/ws.letras
+
+```
+
 
 ### Second task
 

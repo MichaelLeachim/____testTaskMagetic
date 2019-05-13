@@ -21,6 +21,12 @@ class Facade(object):
   def __init__(self):
     logging.basicConfig(filename='log/app.log', filemode='w')
     
+  def formatAccordingToSpec(self,path="workdata/data.output.txt",input_data='workdata/data.txt'):
+    with open(input_data,"r") as datum_file:
+      datum = json.load(datum_file)
+      with open(path,"w+") as write_to:
+        write_to.write("\n".join([k+"/"+v for [k, v] in datum]))
+        
   # will download data to a folder
   def downloadData(self,save_to='workdata/data.txt'):
     conf = AppConfig()
