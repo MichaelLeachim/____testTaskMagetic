@@ -5,26 +5,36 @@
 # @ All rights reserved.                                                               @
 # @@@@@@ At 2019-05-13 13:20 <thereisnodotcollective@gmail.com> @@@@@@@@@@@@@@@@@@@@@@@@
 
+import re
 
 class Downloader(object):
   
-  # Inject requests 
+  ## Do not use CSS/XPATH because there is no requirement for it 
+  ## in the test task + Google uses dynamic HTML classes to
+  ## avoid scrappers
+  
+  storegex = re.compile(u"/store/apps/details\?id\=(.*?)\"",re.MULTILINE)
+  categorygex = re.compile(u"/store/apps/category/(GAME_.*?)\"",re.MULTILINE)
+  
+  # Inject dataGetter module
   def __init__(self,conf):
     self.dataGetter  = conf.dataGetter
     
-  def getPage(self,category):
-    # import ipdb; ipdb.set_trace();
-    return self.dataGetter.get("https://play.google.com/store/apps/category/"+category)
+  def getGamesList(self,category):
+    return self.getList("https://play.google.com/store/apps/category/"+category,self.storegex)
   
-  def parseListOfCategories(self,category):
-    pass
+  def getCategoriesList(self):
+    return self.getList("https://play.google.com/store/apps/category/GAME",self.categorygex)
   
-  def getListOfCategories(self):
-    import ipdb; ipdb.set_trace();    
-    return self.dataGetter.get("https://play.google.com/store/apps/category/GAME")
-    
-  def getAllGamesPerPage(page):
-    pass
-    
-  
-
+  ## Get all distinct items that match categorygex  
+  ## Get all distinct items that match storegex
+  def getList(self,link,selector):
+    res,err = self.dataGetter.get(link)
+    if (err != None):
+      return [],err
+    result = set()
+    for item in selector.finditer(res):
+      point = item.groups()
+      if len(point)>0:
+        result.add(point[0])
+    return sorted(list(result)),None
